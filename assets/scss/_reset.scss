@@ -30,6 +30,9 @@ button {
 button:focus {
   outline: none;
 }
+a {
+  display: inline-block;
+}
 a,
 a:hover {
   text-decoration: none;

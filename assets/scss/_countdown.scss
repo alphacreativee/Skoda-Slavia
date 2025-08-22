@@ -1,0 +1,166 @@
+.countdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.countdown .bloc-time {
+  text-align: center;
+}
+
+.countdown .count-title {
+  display: block;
+  margin-bottom: 15px;
+  font-weight: 400;
+  font-size: 0.94em;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  display: none;
+}
+
+.countdown .figure {
+  position: relative;
+  float: left;
+  height: 30px;
+  width: 25px;
+  margin-right: 5px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2),
+    inset 2px 4px 0 0 rgba(255, 255, 255, 0.08);
+}
+
+.countdown .figure:last-child {
+  margin-right: 0;
+}
+
+.countdown .figure > span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  line-height: 30px;
+  color: var(--color-primary);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Shared after-line */
+.countdown .figure .top:after,
+.countdown .figure .bottom-back:after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Top half */
+.countdown .figure .top {
+  z-index: 3;
+  background-color: #f7f7f7;
+  -webkit-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+  -webkit-transform: perspective(200px);
+  transform: perspective(200px);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 50%;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Bottom (front) */
+.countdown .figure .bottom {
+  z-index: 1;
+}
+
+.countdown .figure .bottom:before {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Bottom (back) */
+.countdown .figure .bottom-back {
+  z-index: 2;
+  top: 0;
+  height: 50%;
+  overflow: hidden;
+  background-color: #f7f7f7;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.countdown .figure .bottom-back span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+/* Top (back) */
+.countdown .figure .top-back {
+  z-index: 4;
+  bottom: 0;
+  background-color: #fff;
+  -webkit-transform-origin: 50% 0;
+  transform-origin: 50% 0;
+  -webkit-transform: perspective(200px) rotateX(180deg);
+  transform: perspective(200px) rotateX(180deg);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  height: 50%;
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.countdown .figure .top-back span {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .countdown {
+    gap: 25px;
+  }
+  .countdown .figure {
+    width: 80px;
+    height: 90px;
+  }
+  .countdown .figure > span {
+    font-size: 4em;
+    line-height: 90px;
+  }
+}
+
+@media (max-width: 600px) {
+  .countdown {
+    gap: 15px;
+  }
+  .countdown .figure {
+    width: 60px;
+    height: 70px;
+  }
+  .countdown .figure > span {
+    font-size: 3em;
+    line-height: 70px;
+  }
+}

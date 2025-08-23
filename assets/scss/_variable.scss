@@ -1,0 +1,23 @@
+:root {
+  --font-primary: "SKODA Next", sans-serif;
+  --color-primary: #15392f;
+  --color-secondary: #78faae;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-secondary-neon: #78faae;
+}
+.font-primary {
+  font-family: var(--font-primary);
+}
+.color-primary {
+  color: var(--color-primary);
+}
+.color-secondary {
+  color: var(--color-secondary);
+}
+.color-white {
+  color: var(--color-white);
+}
+.color-black {
+  color: var(--color-black);
+}

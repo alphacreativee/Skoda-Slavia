@@ -1,15 +1,11 @@
 "use strict";
-console.log("countdown.js loaded");
 
 var Countdown = {
-  // Params
+  $el: null,
   countdown_interval: null,
   target_date: null,
-  $el: null,
 
-  // Initialize the countdown
   init: function () {
-    // Find the countdown element
     this.$el = document.querySelector(".countdown");
 
     if (!this.$el) {
@@ -41,23 +37,15 @@ var Countdown = {
 
     console.log("Target date:", this.target_date.toLocaleString());
 
+    // Initialize display with current values
+    this.updateTime();
+
     // Start countdown
     this.count();
   },
 
   count: function () {
-    var that = this,
-      $day_1 = this.$.days[0],
-      $day_2 = this.$.days[1],
-      $hour_1 = this.$.hours[0],
-      $hour_2 = this.$.hours[1],
-      $min_1 = this.$.minutes[0],
-      $min_2 = this.$.minutes[1],
-      $sec_1 = this.$.seconds[0],
-      $sec_2 = this.$.seconds[1];
-
-    // Initial update
-    this.updateTime();
+    var that = this;
 
     this.countdown_interval = setInterval(function () {
       that.updateTime();
@@ -69,19 +57,8 @@ var Countdown = {
     var timeDifference = this.target_date - now;
 
     if (timeDifference <= 0) {
-      // Time's up!
       clearInterval(this.countdown_interval);
       console.log("Countdown finished!");
-
-      // Set all to 00
-      this.setFigureValue(this.$.days[0], "0");
-      this.setFigureValue(this.$.days[1], "0");
-      this.setFigureValue(this.$.hours[0], "0");
-      this.setFigureValue(this.$.hours[1], "0");
-      this.setFigureValue(this.$.minutes[0], "0");
-      this.setFigureValue(this.$.minutes[1], "0");
-      this.setFigureValue(this.$.seconds[0], "0");
-      this.setFigureValue(this.$.seconds[1], "0");
       return;
     }
 
@@ -93,46 +70,58 @@ var Countdown = {
     var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-    // Update DOM values with animation
+    // Update display with flip animation
     this.checkHour(days, this.$.days[0], this.$.days[1]);
     this.checkHour(hours, this.$.hours[0], this.$.hours[1]);
     this.checkHour(minutes, this.$.minutes[0], this.$.minutes[1]);
     this.checkHour(seconds, this.$.seconds[0], this.$.seconds[1]);
   },
 
-  setFigureValue: function ($el, value) {
-    var $top = $el.querySelector(".top");
-    var $bottom = $el.querySelector(".bottom");
-    $top.innerHTML = value;
-    $bottom.innerHTML = value;
-  },
-
   animateFigure: function ($el, value) {
     var $top = $el.querySelector(".top");
     var $bottom = $el.querySelector(".bottom");
-    var $back_top = $el.querySelector(".top-back span");
-    var $back_bottom = $el.querySelector(".bottom-back span");
+    var $back_top = $el.querySelector(".top-back");
+    var $back_bottom = $el.querySelector(".bottom-back");
 
     // Before we begin, change the back value
-    $back_top.innerHTML = value;
-    $back_bottom.innerHTML = value;
+    $back_top.querySelector("span").innerHTML = value;
+    $back_bottom.querySelector("span").innerHTML = value;
 
-    // Then animate with CSS transitions
-    $top.style.transform = "rotateX(-180deg)";
+    // Animate top flipping down
+    $top.style.transform = "perspective(200px) rotateX(-180deg)";
 
+    // Animate back-top flipping to horizontal
+    $back_top.style.transform = "perspective(200px) rotateX(0deg)";
+
+    // After animation completes
     setTimeout(function () {
+      // Update front values
       $top.innerHTML = value;
       $bottom.innerHTML = value;
-      $top.style.transform = "rotateX(0deg)";
-    }, 300);
+
+      // Reset positions instantly
+      $top.style.transition = "none";
+      $back_top.style.transition = "none";
+
+      $top.style.transform = "perspective(200px) rotateX(0deg)";
+      $back_top.style.transform = "perspective(200px) rotateX(180deg)";
+
+      // Re-enable transitions after a short delay
+      setTimeout(function () {
+        $top.style.transition = "transform 0.8s ease-out";
+        $back_top.style.transition = "transform 0.8s ease-out";
+      }, 50);
+    }, 800);
   },
 
   checkHour: function (value, $el_1, $el_2) {
-    var val_1 = value.toString().padStart(2, "0").charAt(0);
-    var val_2 = value.toString().padStart(2, "0").charAt(1);
+    var paddedValue = value.toString().padStart(2, "0");
+    var val_1 = paddedValue.charAt(0);
+    var val_2 = paddedValue.charAt(1);
     var fig_1_value = $el_1.querySelector(".top").innerHTML;
     var fig_2_value = $el_2.querySelector(".top").innerHTML;
 
+    // Animate only if the figure has changed
     if (fig_1_value !== val_1) {
       this.animateFigure($el_1, val_1);
     }
@@ -143,11 +132,6 @@ var Countdown = {
 };
 
 // Wait for DOM to be ready
-document.addEventListener("DOMContentLoaded", function () {
-  Countdown.init();
-});
-
-// Fallback if DOMContentLoaded already fired
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", function () {
     Countdown.init();

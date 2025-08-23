@@ -1,0 +1,125 @@
+#footer {
+  background-color: var(--color-primary);
+
+  a {
+    transition: all 0.4s ease;
+
+    &:hover {
+      color: var(--color-secondary);
+    }
+  }
+
+  .dropdown-info {
+    grid-column: 1 / -1;
+    margin-bottom: 14px;
+
+    .dropdown-btn {
+      gap: 10px;
+      cursor: pointer;
+      width: fit-content;
+    }
+
+    .dropdown-content {
+      padding-top: 10px;
+    }
+  }
+
+  .footer {
+    &-contact {
+      padding-bottom: 24px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+
+      ul {
+        display: flex;
+        gap: 70px;
+
+        li {
+          gap: 10px;
+
+          .icon {
+            margin-right: 8px;
+          }
+
+          a {
+            color: var(--color-white) !important;
+          }
+        }
+      }
+
+      .social {
+        gap: 15px;
+
+        a {
+          &:hover {
+            color: var(--color-secondary);
+          }
+        }
+      }
+    }
+
+    &-main {
+      padding: 40px;
+    }
+
+    &-top {
+      padding: 24px 0;
+      border-top: 2px solid rgba($color: #fff, $alpha: 0.65);
+
+      ul {
+        gap: 24px;
+      }
+    }
+
+    &-bottom {
+      padding: 20px 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      background-color: #06261c;
+    }
+
+    &-copyright {
+      gap: 24px;
+      grid-column: 1;
+    }
+
+    &-alpha {
+      grid-column: 2;
+      text-align: right;
+    }
+
+    &-menu {
+      border-top: 2px solid rgba($color: #fff, $alpha: 0.65);
+      padding-top: 24px;
+
+      .menu {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+
+        & > li {
+          & > a {
+            margin-bottom: 12px;
+            font-weight: bold;
+            color: var(--color-white) !important;
+          }
+        }
+
+        ul {
+          li:not(:last-child) {
+            margin-bottom: 6px;
+          }
+        }
+
+        a {
+          color: var(--color-white);
+
+          &:hover {
+            color: var(--color-secondary);
+          }
+        }
+      }
+    }
+  }
+}

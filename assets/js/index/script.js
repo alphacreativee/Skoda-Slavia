@@ -109,9 +109,53 @@ function heroSwiper() {
     });
   });
 }
+function animateTextKaraoke() {
+  if ($(".effect-karaoke").length < 1) return;
+
+  gsap.registerPlugin(ScrollTrigger, SplitText);
+  gsap.utils.toArray(".effect-karaoke").forEach((karaoke) => {
+    const splitKaraoke = new SplitText(karaoke, {
+      type: "words, chars",
+      wordsClass: "word",
+      charsClass: "char",
+    });
+
+    gsap.to(splitKaraoke.chars, {
+      color: "#000",
+      duration: 0.6,
+      stagger: 0.05,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: karaoke,
+        start: "top 85%",
+        end: "top 30%",
+        // markers: true,
+        scrub: true,
+      },
+    });
+  });
+}
+function svgSokoda() {
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.querySelectorAll(".skoda-car").forEach((el) => {
+    ScrollTrigger.create({
+      trigger: el,
+      start: "top 80%",
+      // markers: true,
+      onEnter: () => {
+        el.classList.add("active-svg");
+      },
+
+      once: true,
+    });
+  });
+}
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
   heroSwiper();
+  animateTextKaraoke();
+  svgSokoda();
 };
 preloadImages("img").then(() => {
   // Once images are preloaded, remove the 'loading' indicator/class from the body

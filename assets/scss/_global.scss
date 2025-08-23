@@ -1,0 +1,27 @@
+.btn-g {
+  display: inline-block;
+  padding: 10px 32px;
+  border-radius: 24px;
+  font-size: 16px;
+  line-height: 28px;
+  font-weight: bold;
+  min-width: 184px;
+  text-align: center;
+  color: var(--color-black);
+  transition: all 0.3s ease;
+  &:hover {
+    color: var(--color-black);
+  }
+  &.g-primary {
+    background-color: var(--color-secondary-neon);
+    &:hover {
+      background-color: #a8ffcc;
+    }
+  }
+  &.g-secondary {
+    background-color: var(--color-white);
+    &:hover {
+      background-color: #f2f2f2;
+    }
+  }
+}

@@ -20,7 +20,18 @@
     }
 
     .dropdown-content {
-      padding-top: 10px;
+      height: auto;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.9s ease;
+    }
+
+    &.active {
+      transition: max-height 0.9s ease;
+      .dropdown-content {
+        max-height: 500px;
+        overflow: auto;
+      }
     }
   }
 
@@ -87,7 +98,8 @@
 
     &-alpha {
       grid-column: 2;
-      text-align: right;
+      width: max-content;
+      margin-left: auto;
     }
 
     &-menu {

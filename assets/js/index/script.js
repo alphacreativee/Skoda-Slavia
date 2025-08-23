@@ -14,37 +14,69 @@ gsap.ticker.lagSmoothing(0);
 function heroSwiper() {
   document.querySelectorAll(".hero-swiper").forEach((el) => {
     let hideTimeout;
+    const defaultDuration = 3000; // Thời gian autoplay cố định (3000ms)
+
+    // Hàm cập nhật progress bar
+    function updateProgressBars(swiper) {
+      var bullets = swiper.pagination.bullets;
+      bullets.forEach((bullet, index) => {
+        let progressBar = bullet.querySelector(".progress-bar-swiper");
+        if (index < swiper.realIndex) {
+          bullet.classList.add("viewed");
+          bullet.classList.remove("swiper-pagination-bullet-active");
+          progressBar.style.width = "100%";
+          progressBar.style.transition = "none";
+        } else if (index === swiper.realIndex) {
+          bullet.classList.remove("viewed", "swiper-pagination-bullet-active");
+          progressBar.style.width = "0%";
+          progressBar.style.transition = "none";
+          setTimeout(() => {
+            progressBar.style.width = "100%";
+            progressBar.style.transition = `width ${swiper.params.autoplay.delay}ms linear`;
+            // Thêm class viewed sau khi width đạt 100%
+            setTimeout(() => {
+              bullet.classList.add("viewed");
+              bullet.classList.add("swiper-pagination-bullet-active");
+            }, swiper.params.autoplay.delay);
+          }, 50); // Delay nhẹ để đảm bảo render
+        } else {
+          bullet.classList.remove("viewed", "swiper-pagination-bullet-active");
+          progressBar.style.width = "0%";
+          progressBar.style.transition = "none";
+        }
+      });
+    }
 
     const swiper = new Swiper(el, {
       slidesPerView: 1,
       watchSlidesProgress: true,
       speed: 1500,
       loop: true,
-
+      autoplay: {
+        delay: 3000
+      },
       pagination: {
         el: el.querySelector(".swiper-pagination"),
-        clickable: true
-        // renderBullet: function (index, className) {
-        //   return `
-        //     <button class="${className}">
-        //       <span class="progress-bar"></span>
-        //     </button>`;
-        // },
+        clickable: true,
+        renderBullet: function (index, className) {
+          return `
+            <button class="${className}">
+              <span class="progress-bar-swiper"></span>
+            </button>`;
+        }
       },
-      navigation: {
-        nextEl: el.querySelector(".swiper-button-next"),
-        prevEl: el.querySelector(".swiper-button-prev")
-      },
-      on: {
-        slideChangeTransitionStart(swiper) {
-          // swiper.params.autoplay.delay = defaultDuration; // Đặt lại delay
-          // swiper.autoplay.start();
 
+      on: {
+        init(swiper) {
+          updateProgressBars(swiper); // Gọi khi khởi tạo
+        },
+        slideChangeTransitionStart(swiper) {
+          swiper.params.autoplay.delay = defaultDuration; // Đặt lại delay
           clearTimeout(hideTimeout);
         },
-
-        slideChangeTransitionEnd(swiper) {},
-
+        slideChangeTransitionEnd(swiper) {
+          updateProgressBars(swiper);
+        },
         progress(swiper) {
           swiper.slides.forEach((slide) => {
             const slideProgress = slide.progress || 0;
@@ -57,14 +89,12 @@ function heroSwiper() {
             }
           });
         },
-
         touchStart(swiper) {
           swiper.slides.forEach((slide) => {
             slide.style.transition = "";
           });
           clearTimeout(hideTimeout);
         },
-
         setTransition(swiper, speed) {
           const easing = "cubic-bezier(0.25, 0.1, 0.25, 1)";
           swiper.slides.forEach((slide) => {
@@ -132,10 +162,53 @@ function sectionDesign() {
     });
   });
 }
+function animateTextKaraoke() {
+  if ($(".effect-karaoke").length < 1) return;
 
+  gsap.registerPlugin(ScrollTrigger, SplitText);
+  gsap.utils.toArray(".effect-karaoke").forEach((karaoke) => {
+    const splitKaraoke = new SplitText(karaoke, {
+      type: "words, chars",
+      wordsClass: "word",
+      charsClass: "char"
+    });
+
+    gsap.to(splitKaraoke.chars, {
+      color: "#000",
+      duration: 0.6,
+      stagger: 0.05,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: karaoke,
+        start: "top 85%",
+        end: "top 30%",
+        // markers: true,
+        scrub: true
+      }
+    });
+  });
+}
+function svgSokoda() {
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.querySelectorAll(".skoda-car").forEach((el) => {
+    ScrollTrigger.create({
+      trigger: el,
+      start: "top 80%",
+      // markers: true,
+      onEnter: () => {
+        el.classList.add("active-svg");
+      },
+
+      once: true
+    });
+  });
+}
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
   heroSwiper();
+  animateTextKaraoke();
+  svgSokoda();
   sectionDesign();
 };
 preloadImages("img").then(() => {

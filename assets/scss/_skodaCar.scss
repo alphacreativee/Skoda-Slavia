@@ -1,0 +1,48 @@
+.skoda-car {
+  padding-bottom: 80px;
+  &.active-svg {
+    svg {
+      path {
+        animation: textAnimation 2s ease 1 forwards;
+      }
+    }
+  }
+}
+.skoda-title {
+  width: calc(10 / 12 * 100%);
+  padding: 0 40px;
+  margin: 0 auto;
+  svg {
+    path {
+      fill: transparent;
+      stroke: var(--color-primary);
+      stroke-width: 1;
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+    }
+  }
+}
+.skoda-model {
+  margin-top: 64px;
+  h3 {
+    width: calc(10 / 12 * 100%);
+    padding: 0 40px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 40px;
+    line-height: 54px;
+  }
+}
+
+@keyframes textAnimation {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  80% {
+    fill: transparent;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    fill: var(--color-primary);
+  }
+}

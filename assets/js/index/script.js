@@ -23,7 +23,7 @@ function heroSwiper() {
 
       pagination: {
         el: el.querySelector(".swiper-pagination"),
-        clickable: true,
+        clickable: true
         // renderBullet: function (index, className) {
         //   return `
         //     <button class="${className}">
@@ -33,7 +33,7 @@ function heroSwiper() {
       },
       navigation: {
         nextEl: el.querySelector(".swiper-button-next"),
-        prevEl: el.querySelector(".swiper-button-prev"),
+        prevEl: el.querySelector(".swiper-button-prev")
       },
       on: {
         slideChangeTransitionStart(swiper) {
@@ -74,14 +74,69 @@ function heroSwiper() {
               slideInner.style.transition = `${speed}ms ${easing}`;
             }
           });
-        },
-      },
+        }
+      }
     });
   });
 }
+
+function sectionDesign() {
+  if ($(".section-design").length < 1) return;
+
+  $(".section-design .nav-tabs a").click(function () {
+    var position = $(this).parent().position();
+    var width = $(this).parent().width();
+    $(".section-design .slider").css({ left: +position.left, width: width });
+  });
+
+  var actWidth = $(".section-design .nav-tabs")
+    .find(".active")
+    .parent("li")
+    .width();
+  var actPosition = $(".section-design .nav-tabs .active").position();
+
+  $(".section-design .slider").css({
+    left: +actPosition.left,
+    width: actWidth
+  });
+
+  if (!document.querySelector(".swiper-design-parallax")) return;
+
+  document.querySelectorAll(".swiper-design-parallax").forEach((el) => {
+    new Swiper(el, {
+      centeredSlides: true,
+      slidesPerView: 1.5,
+      spaceBetween: 24,
+      speed: 900,
+      parallax: true,
+      loop: true,
+      loopedSlides: 2,
+      autoplay: {
+        delay: 2000
+      },
+      pagination: {
+        el: el.querySelector(".swiper-pagination"),
+        type: "progressbar"
+      },
+      navigation: {
+        nextEl: el.querySelector(".swiper-button-next"),
+        prevEl: el.querySelector(".swiper-button-prev")
+      },
+      breakpoints: {
+        991: {
+          slidesPerView: 1.5,
+          spaceBetween: 40,
+          autoplay: false
+        }
+      }
+    });
+  });
+}
+
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
   heroSwiper();
+  sectionDesign();
 };
 preloadImages("img").then(() => {
   // Once images are preloaded, remove the 'loading' indicator/class from the body

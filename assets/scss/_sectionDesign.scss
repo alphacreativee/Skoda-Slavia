@@ -1,0 +1,147 @@
+.section-design {
+  padding: 80px 0;
+  background-color: #f2f2f2;
+
+  .fade {
+    transition: opacity 0.4s ease;
+  }
+
+  .tab-pane {
+    margin-top: 24px;
+
+    .swiper-design-parallax {
+      .image {
+        width: 100%;
+        aspect-ratio: 900 / 500;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .caption {
+        font-size: 16px;
+        line-height: 28px;
+        color: var(--color-black);
+        text-align: center;
+        margin-top: 24px;
+        transition: opacity 0.5s ease;
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .swiper-slide {
+        &.swiper-slide-active {
+          .caption {
+            opacity: 1;
+            visibility: visible;
+            transition-delay: 0.8s;
+          }
+        }
+      }
+
+      &:hover {
+        .custom-arrow {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+
+      .swiper-pagination {
+        background-color: var(--color-white);
+        width: 200px;
+        margin: 20px auto 0;
+        position: relative;
+        transform: none;
+        height: 8px;
+        border-radius: 12px;
+        overflow: hidden;
+
+        .swiper-pagination-progressbar-fill {
+          background-color: var(--color-black);
+        }
+      }
+
+      .custom-arrow {
+        width: 40px;
+        height: 40px;
+        top: calc(50% - 28px - 24px);
+        margin: 0;
+        transform: translateY(-50%);
+        border-radius: 50%;
+        background-color: var(--color-white);
+        transition: all 0.4s ease;
+        opacity: 0;
+        visibility: hidden;
+
+        &.swiper-button-prev {
+          left: 80px;
+        }
+
+        &.swiper-button-next {
+          right: 80px;
+        }
+
+        &::after {
+          display: none;
+        }
+
+        svg {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+  }
+  .nav-tabs {
+    position: relative;
+    border: none !important;
+    width: max-content;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 30px;
+    border-bottom: 1px solid var(--color-black) !important;
+
+    .nav-link {
+      padding: 0 0 12px 0 !important;
+      width: max-content;
+      font-size: 16px;
+      line-height: 28px;
+      font-weight: bold;
+    }
+
+    .nav-item {
+      width: max-content;
+      flex-grow: unset;
+    }
+  }
+  .nav-tabs li {
+    margin: 0px !important;
+  }
+  .nav-tabs li a {
+    position: relative;
+    margin-right: 0px !important;
+    padding: 20px 40px !important;
+    font-size: 16px;
+    border: none !important;
+    color: var(--color-black);
+  }
+  .slider {
+    display: inline-block;
+    width: 30px;
+    height: 4px;
+    background-color: #419467;
+    position: absolute;
+    z-index: 10;
+    bottom: 0;
+    transition: all 0.4s linear;
+  }
+  .nav-tabs .active {
+    background-color: transparent !important;
+    border: none !important;
+    color: var(--color-black) !important;
+  }
+}

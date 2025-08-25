@@ -258,7 +258,7 @@ function model3D() {
     sensitivity: 300,
     auto: true,
     drag: false,
-    imageArray: generateCarImages("assets/images/white", 25),
+    imageArray: generateCarImages("assets/images/white", 24),
   });
 }
 const init = () => {

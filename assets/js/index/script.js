@@ -243,12 +243,22 @@ function footer() {
     $(this).toggleClass("active");
   });
 }
+
+function sectionGallery() {
+  var lightboxDescription = GLightbox({
+    selector: ".glightbox",
+    loop: true,
+    touchNavigation: true
+  });
+}
+
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
   heroSwiper();
   animateTextKaraoke();
   svgSokoda();
   sectionDesign();
+  sectionGallery();
   footer();
 };
 preloadImages("img").then(() => {

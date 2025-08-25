@@ -252,6 +252,24 @@ function sectionGallery() {
   });
 }
 
+function model3D() {
+  if (document.querySelector(".skoda-car").length < 1) return;
+  function generateCarImages(basePath, totalImages) {
+    const imageArray = [];
+    for (let i = 1; i <= totalImages; i++) {
+      imageArray.push(`${basePath}/car_${i}.png`);
+    }
+    return imageArray;
+  }
+
+  // Sử dụng
+  $("#skoda-modal-container").rollerblade({
+    sensitivity: 300,
+    auto: true,
+    drag: false,
+    imageArray: generateCarImages("assets/images/white", 25)
+  });
+}
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
   heroSwiper();
@@ -259,6 +277,7 @@ const init = () => {
   svgSokoda();
   sectionDesign();
   sectionGallery();
+  model3D();
   footer();
 };
 preloadImages("img").then(() => {

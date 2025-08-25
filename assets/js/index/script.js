@@ -243,6 +243,15 @@ function footer() {
     $(this).toggleClass("active");
   });
 }
+
+function sectionGallery() {
+  var lightboxDescription = GLightbox({
+    selector: ".glightbox",
+    loop: true,
+    touchNavigation: true,
+  });
+}
+
 function model3D() {
   if (document.querySelector(".skoda-car").length < 1) return;
   function generateCarImages(basePath, totalImages) {
@@ -267,6 +276,7 @@ const init = () => {
   animateTextKaraoke();
   svgSokoda();
   sectionDesign();
+  sectionGallery();
   model3D();
   footer();
 };

@@ -241,6 +241,20 @@ function svgSokoda() {
 function footer() {
   $("footer .dropdown-info").on("click", function () {
     $(this).toggleClass("active");
+
+    const content = $(this).find(".dropdown-content")[0];
+
+    if (content.style.height && content.style.height !== "0px") {
+      content.style.height = content.scrollHeight + "px";
+      content.offsetHeight;
+      content.style.height = "0px";
+    } else {
+      content.style.height = content.scrollHeight + "px";
+      content.addEventListener("transitionend", function handler() {
+        content.style.height = "auto";
+        content.removeEventListener("transitionend", handler);
+      });
+    }
   });
 }
 

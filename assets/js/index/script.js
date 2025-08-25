@@ -276,13 +276,13 @@ function formBooking() {
 
   const formBooking = $("#modalBooking form");
 
-  $.getJSON("provinces.json", function (data) {
+  $.getJSON("province.json", function (data) {
     let options = data
       .map((item) => `<option value="${item.name}">${item.name}</option>`)
       .join("");
     formBooking.find('select[name="location"]').append(options);
   }).fail(function () {
-    console.error("Không load được provinces.json");
+    console.error("Không load được province.json");
   });
 
   const dateField = formBooking.find("input[name='date']")[0];
@@ -332,7 +332,7 @@ function formBooking() {
     }
 
     var phone = formBooking.find("input[name='phone']").val().trim();
-    if (phone === "" || !/^[0-9]{10}$/.test(phone)) {
+    if (phone === "") {
       formBooking
         .find("input[name='phone']")
         .closest(".field")
@@ -387,6 +387,8 @@ function formBooking() {
         agency: agency
       };
 
+      console.log(formData);
+
       const WEB_APP_URL =
         "https://script.google.com/macros/s/AKfycbx0Bmh9prx3LpAEX3XoKxAFs3uoObstKo8UIsSK8EIXF9ayK311M94yUKspYo9fp3rhRw/exec";
 
@@ -395,9 +397,13 @@ function formBooking() {
         method: "POST",
         contentType: "application/json",
         data: JSON.stringify(formData),
+        beforeSend: function () {
+          formBooking.find("button[type='submit']").addClass("aloading");
+        },
         success: function (res) {
+          formBooking.find("button[type='submit']").removeClass("aloading");
           alert("Gửi thành công!");
-          $(".form-quote")[0].reset(); // reset form
+          $(".form-quote")[0].reset();
         },
         error: function (xhr, status, error) {
           console.error(xhr.responseText);
@@ -408,10 +414,23 @@ function formBooking() {
   });
 
   $("input[name='phone']").on("input", function () {
-    this.value = this.value.replace(/[^0-9]/g, "");
-    if (this.value.length > 10) {
-      this.value = this.value.slice(0, 10);
+    // Chỉ giữ lại số
+    let val = this.value.replace(/\D/g, "");
+
+    // Giới hạn 10 số
+    if (val.length > 10) {
+      val = val.slice(0, 10);
     }
+
+    // Format: 4-3-3 (VD: 0909 990 009)
+    let formatted = val;
+    if (val.length > 4 && val.length <= 7) {
+      formatted = val.slice(0, 4) + " " + val.slice(4);
+    } else if (val.length > 7) {
+      formatted = val.slice(0, 4) + " " + val.slice(4, 7) + " " + val.slice(7);
+    }
+
+    this.value = formatted;
   });
 }
 

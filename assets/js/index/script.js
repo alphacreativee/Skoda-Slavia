@@ -53,7 +53,7 @@ function heroSwiper() {
       speed: 1500,
       loop: true,
       autoplay: {
-        delay: 3000
+        delay: 3000,
       },
       pagination: {
         el: el.querySelector(".swiper-pagination"),
@@ -63,7 +63,7 @@ function heroSwiper() {
             <button class="${className}">
               <span class="progress-bar-swiper"></span>
             </button>`;
-        }
+        },
       },
 
       on: {
@@ -104,8 +104,8 @@ function heroSwiper() {
               slideInner.style.transition = `${speed}ms ${easing}`;
             }
           });
-        }
-      }
+        },
+      },
     });
   });
 }
@@ -127,7 +127,7 @@ function sectionDesign() {
 
   $(".section-design .slider").css({
     left: +actPosition.left,
-    width: actWidth
+    width: actWidth,
   });
 
   if (!document.querySelector(".swiper-design-parallax")) return;
@@ -145,23 +145,23 @@ function sectionDesign() {
       loop: true,
       loopedSlides: 2,
       autoplay: {
-        delay: 2000
+        delay: 2000,
       },
       pagination: {
         el: el.querySelector(".swiper-pagination"),
-        type: "progressbar"
+        type: "progressbar",
       },
       navigation: {
         nextEl: el.querySelector(".swiper-button-next"),
-        prevEl: el.querySelector(".swiper-button-prev")
+        prevEl: el.querySelector(".swiper-button-prev"),
       },
       breakpoints: {
         991: {
           slidesPerView: 1.5,
           spaceBetween: 40,
-          autoplay: false
-        }
-      }
+          autoplay: false,
+        },
+      },
     });
     swipers.set(el, swiper); // Lưu instance Swiper
     return swiper;
@@ -203,7 +203,7 @@ function animateTextKaraoke() {
     const splitKaraoke = new SplitText(karaoke, {
       type: "words, chars",
       wordsClass: "word",
-      charsClass: "char"
+      charsClass: "char",
     });
 
     gsap.to(splitKaraoke.chars, {
@@ -216,8 +216,8 @@ function animateTextKaraoke() {
         start: "top 85%",
         end: "top 30%",
         // markers: true,
-        scrub: true
-      }
+        scrub: true,
+      },
     });
   });
 }
@@ -233,7 +233,7 @@ function svgSokoda() {
         el.classList.add("active-svg");
       },
 
-      once: true
+      once: true,
     });
   });
 }
@@ -243,12 +243,31 @@ function footer() {
     $(this).toggleClass("active");
   });
 }
+function model3D() {
+  if (document.querySelector(".skoda-car").length < 1) return;
+  function generateCarImages(basePath, totalImages) {
+    const imageArray = [];
+    for (let i = 1; i <= totalImages; i++) {
+      imageArray.push(`${basePath}/car_${i}.png`);
+    }
+    return imageArray;
+  }
+
+  // Sử dụng
+  $("#skoda-modal-container").rollerblade({
+    sensitivity: 300,
+    auto: true,
+    drag: false,
+    imageArray: generateCarImages("assets/images/white", 12),
+  });
+}
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
   heroSwiper();
   animateTextKaraoke();
   svgSokoda();
   sectionDesign();
+  model3D();
   footer();
 };
 preloadImages("img").then(() => {

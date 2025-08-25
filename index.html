@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="./assets/libs/lenis.css" />
     <link rel="stylesheet" href="./assets/libs/swiper-bundle.min.css" />
     <link rel="stylesheet" href="./assets/libs/glightbox.min.css" />
+    <link rel="stylesheet" href="./assets/libs/lightpick.min.css" />
     <!-- end meta -->
     <!-- link custom css page -->
     <link rel="stylesheet" href="./assets/font/skoda_next/font.min.css" />
@@ -78,7 +79,13 @@
           <h5 class="hero-sub">Škoda Slavia</h5>
           <h1 class="hero-title">Xe chất Âu, định chất sống</h1>
           <div class="btn-group">
-            <a href="#" class="btn-g g-primary">Đăng ký lái thử</a>
+            <a
+              href="#"
+              class="btn-g g-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#modalBooking"
+              >Đăng ký lái thử</a
+            >
             <a href="#" class="btn-g g-secondary">Catalogue</a>
           </div>
         </div>
@@ -453,6 +460,105 @@
       </section>
     </main>
     <!-- layout -->
+
+    <div class="modal fade" id="modalBooking" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body">
+            <h3 class="h2-font color-black">Đăng ký lái thử</h3>
+            <p class="b1-font color-black">
+              Quý khách vui lòng điền đầy đủ thông tin tại đây.
+            </p>
+
+            <form action="#" method="post" class="form-booking">
+              <div class="field-group">
+                <div class="field">
+                  <label for="dongxe">Chọn dòng xe*</label>
+                  <select name="dongxe">
+                    <option value="0" selected>Vui lòng chọn</option>
+                    <option value="1">Dòng xe 1</option>
+                    <option value="2">Dòng xe 2</option>
+                    <option value="3">Dòng xe 3</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="date">Thời gian dự định lái thử*</label>
+                  <input
+                    type="text"
+                    name="date"
+                    placeholder="dd/mm/yyyy"
+                    autocomplete="off"
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <div class="field-group">
+                <div class="field">
+                  <label for="fullname">Họ tên*</label>
+                  <input
+                    type="text"
+                    name="fullname"
+                    placeholder="VD: Nguyễn Văn A"
+                  />
+                </div>
+                <div class="field">
+                  <label for="phone">Số điện thoại*</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="VD: 0909 990 009"
+                    pattern="[0-9]{10}"
+                  />
+                </div>
+              </div>
+
+              <div class="field-group">
+                <div class="field">
+                  <label for="email">Email*</label>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="VD: email@example.com"
+                  />
+                </div>
+                <div class="field">
+                  <label for="location">Tỉnh/Thành Phố*</label>
+                  <select name="location">
+                    <option value="0" selected>Vui lòng chọn</option>
+                    <option value="1">Hà Nội</option>
+                    <option value="2">TP. Hồ Chí Minh</option>
+                    <option value="3">Đà Nẵng</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="agency">Đại lý đăng ký lái thử*</label>
+                <select name="agency">
+                  <option value="0" selected>Vui lòng chọn</option>
+                  <option value="1">Đại lý 1</option>
+                  <option value="2">Đại lý 2</option>
+                  <option value="3">Đại lý 3</option>
+                </select>
+              </div>
+
+              <div class="note">
+                <span>(*)</span> Chương trình chỉ dành cho những khách hàng đã
+                có bằng lái xe ô tô.
+              </div>
+
+              <div class="field-group">
+                <button type="submit" class="btn-g g-primary">
+                  Đăng ký ngay
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- footer -->
     <script>
       fetch("./components/footer.html")
@@ -474,6 +580,8 @@
     <script src="./assets/libs/imagesloaded.pkgd.min.js"></script>
     <script src="./assets/libs/swiper-bundle.min.js"></script>
     <script src="./assets/libs/glightbox.min.js"></script>
+    <script src="./assets/libs/moment.min.js"></script>
+    <script src="./assets/libs/lightpick.min.js"></script>
     <script src="https://cdn.rawgit.com/austenpayan/rollerblade/416da2f4/rollerblade.js"></script>
     <!-- import custom js -->
     <script src="./assets/main/js/countdown.min.js"></script>

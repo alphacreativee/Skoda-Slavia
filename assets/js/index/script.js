@@ -270,6 +270,151 @@ function model3D() {
     imageArray: generateCarImages("assets/images/white", 25)
   });
 }
+
+function formBooking() {
+  if ($("#modalBooking").length < 1) return;
+
+  const formBooking = $("#modalBooking form");
+
+  $.getJSON("provinces.json", function (data) {
+    let options = data
+      .map((item) => `<option value="${item.name}">${item.name}</option>`)
+      .join("");
+    formBooking.find('select[name="location"]').append(options);
+  }).fail(function () {
+    console.error("Không load được provinces.json");
+  });
+
+  const dateField = formBooking.find("input[name='date']")[0];
+  if (dateField) {
+    new Lightpick({
+      field: dateField,
+      singleDate: true,
+      numberOfMonths: 1,
+      format: "DD/MM/YYYY",
+      minDate: moment(),
+      onSelect: function (start) {
+        try {
+          if (!start) return;
+
+          dateField.value = start.format("DD/MM/YYYY");
+          dateField.classList.remove("error");
+        } catch (error) {
+          console.error("Lỗi trong Lightpick onSelect:", error);
+        }
+      }
+    });
+  }
+
+  formBooking.on("submit", function (e) {
+    e.preventDefault();
+
+    var isValid = true;
+
+    $(this).find(".field").removeClass("error");
+
+    var dongxe = formBooking.find("select[name='dongxe']").val().trim();
+    if (dongxe === "" || dongxe === "0") {
+      formBooking
+        .find("select[name='dongxe']")
+        .closest(".field")
+        .addClass("error");
+      isValid = false;
+    }
+
+    var fullname = formBooking.find("input[name='fullname']").val().trim();
+    if (fullname === "") {
+      formBooking
+        .find("input[name='fullname']")
+        .closest(".field")
+        .addClass("error");
+      isValid = false;
+    }
+
+    var phone = formBooking.find("input[name='phone']").val().trim();
+    if (phone === "" || !/^[0-9]{10}$/.test(phone)) {
+      formBooking
+        .find("input[name='phone']")
+        .closest(".field")
+        .addClass("error");
+      isValid = false;
+    }
+
+    var email = formBooking.find("input[name='email']").val().trim();
+    if (email === "" || !/^\S+@\S+\.\S+$/.test(email)) {
+      formBooking
+        .find("input[name='email']")
+        .closest(".field")
+        .addClass("error");
+      isValid = false;
+    }
+
+    var location = formBooking.find("select[name='location']").val().trim();
+    if (location === "" || location === "0") {
+      formBooking
+        .find("select[name='location']")
+        .closest(".field")
+        .addClass("error");
+      isValid = false;
+    }
+
+    var agency = formBooking.find("select[name='agency']").val().trim();
+    if (agency === "" || agency === "0") {
+      formBooking
+        .find("select[name='agency']")
+        .closest(".field")
+        .addClass("error");
+      isValid = false;
+    }
+
+    var date = formBooking.find("input[name='date']").val();
+    if (date === "") {
+      formBooking
+        .find("input[name='date']")
+        .closest(".field")
+        .addClass("error");
+      isValid = false;
+    }
+
+    if (isValid) {
+      var formData = {
+        dongxe: dongxe,
+        date: date,
+        fullname: fullname,
+        phone: phone,
+        email: email,
+        location: location,
+        agency: agency
+      };
+
+      const WEB_APP_URL =
+        "https://script.google.com/macros/s/AKfycbx0Bmh9prx3LpAEX3XoKxAFs3uoObstKo8UIsSK8EIXF9ayK311M94yUKspYo9fp3rhRw/exec";
+
+      $.ajax({
+        url: WEB_APP_URL,
+        method: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(formData),
+        success: function (res) {
+          alert("Gửi thành công!");
+          $(".form-quote")[0].reset(); // reset form
+        },
+        error: function (xhr, status, error) {
+          console.error(xhr.responseText);
+          alert("Có lỗi xảy ra, vui lòng thử lại.");
+        }
+      });
+    }
+  });
+
+  $("input[name='phone']").on("input", function () {
+    this.value = this.value.replace(/[^0-9]/g, "");
+    if (this.value.length > 10) {
+      this.value = this.value.slice(0, 10);
+    }
+  });
+}
+
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
   heroSwiper();
@@ -278,6 +423,7 @@ const init = () => {
   sectionDesign();
   sectionGallery();
   model3D();
+  formBooking();
   footer();
 };
 preloadImages("img").then(() => {

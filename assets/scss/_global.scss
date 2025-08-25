@@ -1,3 +1,8 @@
+::selection {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
 .btn-g {
   display: inline-block;
   padding: 10px 32px;
@@ -24,4 +29,197 @@
       background-color: #f2f2f2;
     }
   }
+}
+
+#modalBooking {
+  .modal-dialog {
+    width: 590px;
+    max-width: 100%;
+  }
+
+  .modal-content {
+    border-radius: unset;
+    border: none;
+  }
+
+  .modal-body {
+    padding: 20px;
+
+    form {
+      margin-top: 24px;
+    }
+
+    .field-group {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .field {
+      position: relative;
+
+      &:has(input[name="date"]) {
+        &:after {
+          content: "";
+          position: absolute;
+          bottom: 20px;
+          right: 12px;
+          width: 16px;
+          height: 16px;
+          background: url("../../images/calendar.svg") no-repeat center;
+          background-size: cover;
+          transform: translateY(50%);
+        }
+      }
+
+      &.error {
+        label {
+          color: #ff0000;
+        }
+      }
+    }
+
+    label {
+      font-size: 16px;
+      line-height: 28px;
+      color: var(--color-black);
+      margin-bottom: 4px;
+    }
+
+    input,
+    select {
+      height: 40px;
+      width: 100%;
+      padding: 5px 15px;
+      border: 1px solid #161718;
+    }
+
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background: #fff
+        url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='9' height='6' viewBox='0 0 9 6' fill='none'><path d='M1 1L4.53553 4.53553L8.07107 0.999999' stroke='%23161718' stroke-width='2'/></svg>")
+        no-repeat right 12px center;
+    }
+
+    .note {
+      margin-top: 8px;
+      font-size: 16px;
+      line-height: 28px;
+
+      span {
+        color: #ff0000;
+      }
+    }
+
+    button {
+      margin-top: 24px;
+      width: max-content;
+    }
+  }
+}
+
+.modal-backdrop.show {
+  opacity: 0.8;
+}
+
+.lightpick {
+  box-shadow: unset;
+  padding: 0;
+  color: var(--color-black);
+  background-color: var(--color-white);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.lightpick__day.is-today {
+  color: var(--color-primary);
+  font-weight: bold;
+  background-image: none;
+}
+
+.lightpick__day.is-in-range:hover {
+  background-image: none;
+  background-color: var(--color-black);
+}
+
+.lightpick__day:not(.is-disabled):hover,
+.lightpick__day.is-start-date.is-end-date {
+  background-image: none;
+}
+
+.lightpick__day.is-in-range {
+  background-color: rgba(132, 22, 26, 0.8);
+  color: #fff;
+}
+
+.lightpick__month {
+  padding: 10px;
+  padding-left: 0;
+  width: 280px;
+}
+
+.lightpick__day-of-the-week,
+.lightpick__month-title > .lightpick__select-months,
+.lightpick__month-title > .lightpick__select {
+  color: var(--color-black);
+}
+
+.lightpick__day.is-end-date.is-in-range.is-flipped,
+.lightpick__day.is-start-date.is-in-range,
+.lightpick__day.is-end-date.is-in-range,
+.lightpick__day.is-start-date.is-in-range.is-flipped {
+  background-color: var(--color-black);
+}
+
+.lightpick__month-title {
+  padding: 0;
+  margin-left: 8px;
+}
+.lightpick__month-title > .lightpick__select-months,
+.lightpick__day-of-the-week {
+  text-align: left;
+}
+.lightpick__toolbar {
+  display: flex;
+  gap: 5px;
+  padding: 10px 0;
+  background-color: var(--color-white);
+  @media (max-width: 991px) {
+    padding-right: 8px;
+  }
+}
+.lightpick__next-action,
+.lightpick__previous-action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0;
+  background-image: url("../../images/ic-arrow-calendar-right.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80% 80%;
+  background-color: var(--color-black);
+  margin: 0;
+}
+.lightpick__next-action {
+  transform: scaleX(-1);
+}
+
+.lightpick__day.is-available {
+  transition: all 0.3s ease;
+  border-radius: 50%;
+}
+
+.lightpick__day.is-end-date,
+.lightpick__day.is-end-date:hover,
+.lightpick__day.is-start-date,
+.lightpick__day.is-start-date:hover,
+.lightpick__day.is-available:hover {
+  background-color: var(--color-black);
+  background-image: unset;
+  border-radius: 50%;
+  color: var(--color-white);
 }

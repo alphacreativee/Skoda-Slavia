@@ -4,6 +4,9 @@
   align-items: center;
   gap: 16px;
   flex-wrap: wrap;
+  @media (max-width: 991px) {
+    gap: 8px;
+  }
 }
 
 .countdown .bloc-time {

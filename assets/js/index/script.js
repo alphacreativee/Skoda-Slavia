@@ -481,6 +481,7 @@ function animationText() {
   });
 }
 function backToTop() {
+  if (!document.getElementById("back-to-top")) return;
   let myButton = document.getElementById("back-to-top");
   myButton.addEventListener("click", function () {
     document.body.scrollTop = 0; // For Safari

@@ -256,3 +256,33 @@
   border-radius: 50%;
   color: var(--color-white);
 }
+#back-to-top {
+  position: fixed;
+  z-index: 99;
+  width: 40px;
+  height: 40px;
+  background-color: #464748;
+  border-radius: 50%;
+  bottom: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s;
+  opacity: 0;
+  visibility: hidden;
+  right: 20px;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -5px;
+    background-color: transparent;
+  }
+  &.show {
+    opacity: 1;
+    visibility: visible;
+    right: 40px;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}

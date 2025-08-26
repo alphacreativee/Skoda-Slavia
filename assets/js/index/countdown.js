@@ -35,7 +35,7 @@ var Countdown = {
       return;
     }
 
-    console.log("Target date:", this.target_date.toLocaleString());
+    // console.log("Target date:", this.target_date.toLocaleString());
 
     // Initialize display with current values
     this.updateTime();
@@ -58,7 +58,7 @@ var Countdown = {
 
     if (timeDifference <= 0) {
       clearInterval(this.countdown_interval);
-      console.log("Countdown finished!");
+      // console.log("Countdown finished!");
       return;
     }
 

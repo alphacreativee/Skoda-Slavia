@@ -53,7 +53,7 @@ function heroSwiper() {
       speed: 1500,
       loop: true,
       autoplay: {
-        delay: 3000
+        delay: 3000,
       },
       pagination: {
         el: el.querySelector(".swiper-pagination"),
@@ -63,7 +63,7 @@ function heroSwiper() {
             <button class="${className}">
               <span class="progress-bar-swiper"></span>
             </button>`;
-        }
+        },
       },
 
       on: {
@@ -104,8 +104,8 @@ function heroSwiper() {
               slideInner.style.transition = `${speed}ms ${easing}`;
             }
           });
-        }
-      }
+        },
+      },
     });
   });
 }
@@ -127,7 +127,7 @@ function sectionDesign() {
 
   $(".section-design .slider").css({
     left: +actPosition.left,
-    width: actWidth
+    width: actWidth,
   });
 
   if (!document.querySelector(".swiper-design-parallax")) return;
@@ -145,23 +145,23 @@ function sectionDesign() {
       loop: true,
       loopedSlides: 2,
       autoplay: {
-        delay: 2000
+        delay: 2000,
       },
       pagination: {
         el: el.querySelector(".swiper-pagination"),
-        type: "progressbar"
+        type: "progressbar",
       },
       navigation: {
         nextEl: el.querySelector(".swiper-button-next"),
-        prevEl: el.querySelector(".swiper-button-prev")
+        prevEl: el.querySelector(".swiper-button-prev"),
       },
       breakpoints: {
         991: {
           slidesPerView: 1.5,
           spaceBetween: 40,
-          autoplay: false
-        }
-      }
+          autoplay: false,
+        },
+      },
     });
     swipers.set(el, swiper); // Lưu instance Swiper
     return swiper;
@@ -203,7 +203,7 @@ function animateTextKaraoke() {
     const splitKaraoke = new SplitText(karaoke, {
       type: "words, chars",
       wordsClass: "word",
-      charsClass: "char"
+      charsClass: "char",
     });
 
     gsap.to(splitKaraoke.chars, {
@@ -216,8 +216,8 @@ function animateTextKaraoke() {
         start: "top 85%",
         end: "top 30%",
         // markers: true,
-        scrub: true
-      }
+        scrub: true,
+      },
     });
   });
 }
@@ -233,7 +233,7 @@ function svgSokoda() {
         el.classList.add("active-svg");
       },
 
-      once: true
+      once: true,
     });
   });
 }
@@ -262,7 +262,7 @@ function sectionGallery() {
   var lightboxDescription = GLightbox({
     selector: ".glightbox",
     loop: true,
-    touchNavigation: true
+    touchNavigation: true,
   });
 }
 
@@ -278,10 +278,10 @@ function model3D() {
 
   // Sử dụng
   $("#skoda-modal-container").rollerblade({
-    sensitivity: 300,
+    sensitivity: 400,
     auto: true,
     drag: false,
-    imageArray: generateCarImages("assets/images/white", 24)
+    imageArray: generateCarImages("assets/images/white", 24),
   });
 }
 
@@ -325,7 +325,7 @@ function formBooking() {
         } catch (error) {
           console.error("Lỗi trong Lightpick onSelect:", error);
         }
-      }
+      },
     });
   }
 
@@ -407,10 +407,10 @@ function formBooking() {
         phone: phone,
         email: email,
         location: location,
-        agency: agency
+        agency: agency,
       };
 
-      console.log(formData);
+      // console.log(formData);
 
       const WEB_APP_URL =
         "https://script.google.com/macros/s/AKfycbx0Bmh9prx3LpAEX3XoKxAFs3uoObstKo8UIsSK8EIXF9ayK311M94yUKspYo9fp3rhRw/exec";
@@ -431,7 +431,7 @@ function formBooking() {
         error: function (xhr, status, error) {
           console.error(xhr.responseText);
           alert("Có lỗi xảy ra, vui lòng thử lại.");
-        }
+        },
       });
     }
   });
@@ -457,6 +457,29 @@ function formBooking() {
   });
 }
 
+function animationText() {
+  gsap.utils.toArray(".data-fade-in").forEach((element) => {
+    gsap.fromTo(
+      element,
+      {
+        "will-change": "opacity, transform",
+        opacity: 0,
+        y: 20,
+      },
+      {
+        scrollTrigger: {
+          trigger: element,
+          start: "top 75%",
+          end: "bottom 75%",
+        },
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "sine.out",
+      }
+    );
+  });
+}
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
   heroSwiper();
@@ -466,6 +489,7 @@ const init = () => {
   sectionGallery();
   model3D();
   formBooking();
+  animationText();
   footer();
 };
 preloadImages("img").then(() => {
@@ -480,7 +504,6 @@ $("a").on("click", function (e) {
   // Nếu liên kết dẫn đến trang khác (không phải hash link hoặc javascript void)
   if (this.href && !this.href.match(/^#/) && !this.href.match(/^javascript:/)) {
     isLinkClicked = true;
-    console.log("1");
   }
 });
 

@@ -92,7 +92,14 @@
 
   .modal-body {
     padding: 20px;
-
+    @media (max-width: 767px) {
+      padding: 16px;
+      h3 {
+        font-size: 20px;
+        line-height: 26px;
+        margin-bottom: 16px;
+      }
+    }
     form {
       margin-top: 24px;
     }
@@ -102,6 +109,9 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 16px;
       margin-bottom: 16px;
+      @media (max-width: 767px) {
+        grid-template-columns: repeat(1, 1fr);
+      }
     }
 
     .field {
@@ -292,6 +302,10 @@
   opacity: 0;
   visibility: hidden;
   right: 20px;
+  @media (max-width: 991px) {
+    right: 0;
+    bottom: 20px;
+  }
   &::before {
     content: "";
     position: absolute;
@@ -302,8 +316,34 @@
     opacity: 1;
     visibility: visible;
     right: 40px;
+    @media (max-width: 991px) {
+      right: 20px;
+    }
   }
   &:hover {
     cursor: pointer;
+  }
+}
+.cta-mobile {
+  display: none;
+  @media (max-width: 991px) {
+    display: flex;
+    position: fixed;
+    z-index: 9;
+    right: 20px;
+    bottom: 76px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    .phone,
+    .test-drive {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }

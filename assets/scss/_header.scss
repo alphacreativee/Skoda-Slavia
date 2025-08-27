@@ -108,6 +108,10 @@
       color: var(--color-secondary-neon);
       display: inline-block;
       cursor: pointer;
+      transition: color 0.3s;
+      &:hover {
+        color: var(--color-white);
+      }
     }
     &-inner {
       display: flex;
@@ -199,6 +203,27 @@
     @media (max-width: 991px) {
       display: none;
     }
+    &:hover {
+      a {
+        span {
+          color: var(--color-secondary);
+        }
+      }
+      .icon {
+        svg {
+          path {
+            stroke: var(--color-secondary);
+          }
+        }
+      }
+    }
+    .icon {
+      svg {
+        path {
+          transition: all 0.3s ease;
+        }
+      }
+    }
     a {
       display: flex;
       align-items: center;
@@ -208,6 +233,7 @@
         line-height: 24px;
         font-weight: bold;
         color: var(--color-primary);
+        transition: color 0.3s ease;
       }
     }
   }

@@ -13,7 +13,7 @@
     }
     .swiper-pagination {
       top: auto;
-      bottom: 24px;
+      bottom: 40px;
       left: auto;
       right: 40px;
       width: max-content;
@@ -22,6 +22,10 @@
       transition: none;
       @media (max-width: 991px) {
         left: 24px;
+      }
+      @media (max-width: 767px) {
+        right: 24px;
+        width: calc(100% - 48px);
       }
       &-bullet {
         width: 48px;
@@ -32,7 +36,9 @@
         position: relative;
 
         transition: height 0.3s ease;
-
+        @media (max-width: 767px) {
+          width: calc(100% / var(--count-item));
+        }
         &.viewed {
           opacity: 1;
           background-color: rgba(255, 255, 255, 1);
@@ -66,7 +72,7 @@
   &-content {
     position: absolute;
     left: 40px;
-    bottom: 64px;
+    bottom: 40px;
     z-index: 2;
     max-width: 80%;
     @media (max-width: 991px) {

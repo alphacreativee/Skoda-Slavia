@@ -4,6 +4,10 @@
     svg {
       path {
         animation: textAnimation 2s ease 1 forwards;
+
+        @media (max-width: 991px) {
+          animation: textAnimationMobile 2s ease 1 forwards;
+        }
       }
     }
   }
@@ -23,6 +27,11 @@
       stroke-width: 1;
       stroke-dasharray: 1000;
       stroke-dashoffset: 1000;
+
+      @media (max-width: 991px) {
+        stroke-dasharray: 100;
+        stroke-dashoffset: 100;
+      }
     }
   }
 }
@@ -64,6 +73,19 @@
     stroke-dashoffset: 1000;
   }
   80% {
+    fill: transparent;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    fill: var(--color-primary);
+  }
+}
+
+@keyframes textAnimationMobile {
+  0% {
+    stroke-dashoffset: 100;
+  }
+  95% {
     fill: transparent;
   }
   100% {

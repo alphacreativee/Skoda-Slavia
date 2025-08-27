@@ -1,14 +1,24 @@
 .section-gallery {
   padding: 80px 40px;
-
+  @media (max-width: 991px) {
+    padding: 0 20px 64px;
+  }
   .gallery-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    @media (max-width: 991px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
   }
 
   .title {
     margin-bottom: 40px;
+    @media (max-width: 991px) {
+      font-size: 20px;
+      line-height: 26px;
+    }
   }
 
   .gallery-item {

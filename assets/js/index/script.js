@@ -125,6 +125,8 @@ function sectionDesign() {
     .width();
   var actPosition = $(".section-design .nav-tabs .active").position();
 
+  console.log($(".section-design .slider"));
+
   $(".section-design .slider").css({
     left: +actPosition.left,
     width: actWidth
@@ -467,7 +469,7 @@ function headerDesktop() {
     gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 
     // Click scroll + active
-    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    document.querySelectorAll('#header a[href^="#"]').forEach((link) => {
       link.addEventListener("click", function (e) {
         e.preventDefault();
         const targetElement = document.querySelector(this.getAttribute("href"));
@@ -480,7 +482,7 @@ function headerDesktop() {
         }
 
         document
-          .querySelectorAll('a[href^="#"]')
+          .querySelectorAll('#headera[href^="#"]')
           .forEach((a) => a.classList.remove("active"));
         this.classList.add("active");
       });

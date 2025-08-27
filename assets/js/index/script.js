@@ -284,6 +284,8 @@ function model3D() {
     mainUrl = assetUrl + "/assets/images/white";
   }
 
+  console.log(mainUrl);
+
   $("#skoda-modal-container").rollerblade({
     sensitivity: 300,
     auto: true,
@@ -417,9 +419,9 @@ function formBooking() {
       console.log(formData);
 
       const WEB_APP_URL =
-        "https://script.google.com/macros/s/AKfycbx0Bmh9prx3LpAEX3XoKxAFs3uoObstKo8UIsSK8EIXF9ayK311M94yUKspYo9fp3rhRw/exec";
+        "https://script.google.com/macros/s/AKfycbw1BLYJRYJRuaYR3tBSNuvPsIPUc6mM3m6Oolrjnk9iwRqgmXLmOllii_x94tOQn-vx/exec";
 
-      $.ajax({
+      https: $.ajax({
         url: WEB_APP_URL,
         method: "POST",
         contentType: "application/json",
@@ -430,7 +432,7 @@ function formBooking() {
         success: function (res) {
           formBooking.find("button[type='submit']").removeClass("aloading");
           alert("Gửi thành công!");
-          $(".form-quote")[0].reset();
+          formBooking[0].reset();
         },
         error: function (xhr, status, error) {
           console.error(xhr.responseText);

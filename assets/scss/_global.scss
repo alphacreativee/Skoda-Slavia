@@ -69,6 +69,16 @@
 }
 
 #modalBooking {
+  .modal-close {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    padding: 3px;
+    top: 17px;
+    right: 17px;
+    cursor: pointer;
+  }
+
   .modal-dialog {
     width: 590px;
     max-width: 100%;

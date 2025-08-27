@@ -9,8 +9,9 @@
   border-radius: 24px;
   font-size: 16px;
   line-height: 28px;
-  font-weight: bold;
+  font-weight: 700;
   min-width: 184px;
+  letter-spacing: 0.64px;
   text-align: center;
   color: var(--color-black);
   transition: all 0.3s ease;
@@ -177,7 +178,8 @@
   padding: 0;
   color: var(--color-black);
   background-color: var(--color-white);
-  border-radius: 4px;
+  border-radius: unset;
+  border: 1px solid var(--color-black);
   overflow: hidden;
 }
 
@@ -205,7 +207,7 @@
 .lightpick__month {
   padding: 10px;
   padding-left: 0;
-  width: 280px;
+  width: 267px;
 }
 
 .lightpick__day-of-the-week,
@@ -258,6 +260,11 @@
 .lightpick__day.is-available {
   transition: all 0.3s ease;
   border-radius: 50%;
+}
+
+.lightpick__day {
+  height: auto;
+  aspect-ratio: 1;
 }
 
 .lightpick__day.is-end-date,

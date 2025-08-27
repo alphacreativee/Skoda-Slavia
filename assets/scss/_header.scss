@@ -166,6 +166,12 @@
             background-color: transparent;
             z-index: 1;
           }
+          &.active {
+            &::before {
+              transform: scaleX(1);
+              transform-origin: bottom left;
+            }
+          }
           &:hover {
             &::before {
               transform: scaleX(1);

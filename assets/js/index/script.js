@@ -518,7 +518,27 @@ function headerDesktop() {
   });
 }
 headerDesktop();
-
+function backToTop() {
+  if (!document.getElementById("back-to-top")) return;
+  let myButton = document.getElementById("back-to-top");
+  myButton.addEventListener("click", function () {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  });
+  window.onscroll = function () {
+    scrollFunction();
+  };
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 120 ||
+      document.documentElement.scrollTop > 120
+    ) {
+      myButton.classList.add("show");
+    } else {
+      myButton.classList.remove("show");
+    }
+  }
+}
 document.addEventListener("DOMContentLoaded", function () {
   model3D();
 });
@@ -548,6 +568,7 @@ const init = () => {
   formBooking();
   footer();
   menuMobile();
+  backToTop();
 };
 preloadImages("img").then(() => {
   // Once images are preloaded, remove the 'loading' indicator/class from the body

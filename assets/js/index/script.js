@@ -379,6 +379,7 @@ function formBooking() {
 
     if (isValid) {
       var formData = {
+        action: "submit_booking_form",
         dongxe: dongxe,
         date: date,
         fullname: fullname,
@@ -391,24 +392,42 @@ function formBooking() {
       const WEB_APP_URL =
         "https://script.google.com/macros/s/AKfycbw1BLYJRYJRuaYR3tBSNuvPsIPUc6mM3m6Oolrjnk9iwRqgmXLmOllii_x94tOQn-vx/exec";
 
-      https: $.ajax({
-        url: WEB_APP_URL,
-        method: "POST",
-        contentType: "application/json",
-        data: JSON.stringify(formData),
-        beforeSend: function () {
-          formBooking.find("button[type='submit']").addClass("aloading");
-        },
-        success: function (res) {
-          formBooking.find("button[type='submit']").removeClass("aloading");
-          alert("Gửi thành công!");
-          formBooking[0].reset();
-        },
-        error: function (xhr, status, error) {
-          console.error(xhr.responseText);
-          alert("Có lỗi xảy ra, vui lòng thử lại.");
-        }
-      });
+      formBooking.find("button[type='submit']").addClass("aloading");
+      setTimeout(() => {
+        formBooking.find("button[type='submit']").removeClass("aloading");
+
+        formBooking.find(".message").show();
+        formBooking[0].reset();
+
+        setTimeout(() => {
+          formBooking.find(".message").hide();
+        }, 10000);
+      }, 3000);
+
+      // $.ajax({
+      //   url: ajaxUrl,
+      //   method: "POST",
+      //   contentType: "application/json",
+      //   data: formData,
+      //   beforeSend: function () {
+      //     formBooking.find("button[type='submit']").addClass("aloading");
+      //   },
+      //   success: function (res) {
+      //     formBooking.find("button[type='submit']").removeClass("aloading");
+      //     // alert("Gửi thành công!");
+
+      //     formBooking.find(".message").show();
+      //     formBooking[0].reset();
+
+      //     setTimeout(() => {
+      //       formBooking.find(".message").hide();
+      //     }, 10000);
+      //   },
+      //   error: function (xhr, status, error) {
+      //     console.error(xhr.responseText);
+      //     alert("Có lỗi xảy ra, vui lòng thử lại.");
+      //   }
+      // });
     }
   });
 

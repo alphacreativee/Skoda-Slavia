@@ -172,6 +172,13 @@
       }
     }
 
+    .message {
+      color: var(--color-primary);
+      font-size: 16px;
+      line-height: 22px;
+      margin-top: 10px;
+    }
+
     button {
       margin-top: 24px;
       width: max-content;

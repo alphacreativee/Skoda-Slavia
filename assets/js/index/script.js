@@ -456,7 +456,7 @@ function model3D() {
   console.log(mainUrl);
 
   $("#skoda-modal-container").rollerblade({
-    sensitivity: 300,
+    sensitivity: 800,
     auto: true,
     drag: false,
     imageArray: generateCarImages(mainUrl, 24),

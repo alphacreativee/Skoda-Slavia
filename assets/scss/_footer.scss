@@ -82,7 +82,7 @@
 
     &-top {
       padding: 24px 0;
-      border-top: 2px solid rgba($color: #fff, $alpha: 0.65);
+      border-top: 1px solid rgba($color: #fff, $alpha: 0.65);
       @media (max-width: 991px) {
         padding: 20px 0;
       }
@@ -91,6 +91,10 @@
         @media (max-width: 991px) {
           flex-wrap: wrap;
           gap: 24px 40px;
+        }
+
+        a {
+          font-weight: bold;
         }
       }
     }
@@ -128,7 +132,7 @@
     }
 
     &-menu {
-      border-top: 2px solid rgba($color: #fff, $alpha: 0.65);
+      border-top: 1px solid rgba($color: #fff, $alpha: 0.65);
       padding-top: 24px;
 
       .menu {

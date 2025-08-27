@@ -137,8 +137,7 @@ function sectionDesign() {
   // Hàm khởi tạo Swiper cho một phần tử
   function initSwiper(el) {
     const swiper = new Swiper(el, {
-      centeredSlides: true,
-      slidesPerView: 1.5,
+      slidesPerView: 1,
       spaceBetween: 24,
       speed: 900,
       parallax: true,
@@ -147,6 +146,14 @@ function sectionDesign() {
       autoplay: {
         delay: 2000,
       },
+      breakpoints: {
+        991: {
+          slidesPerView: 1.5,
+          spaceBetween: 24,
+          centeredSlides: true,
+          autoplay: false,
+        },
+      },
       pagination: {
         el: el.querySelector(".swiper-pagination"),
         type: "progressbar",
@@ -154,13 +161,6 @@ function sectionDesign() {
       navigation: {
         nextEl: el.querySelector(".swiper-button-next"),
         prevEl: el.querySelector(".swiper-button-prev"),
-      },
-      breakpoints: {
-        991: {
-          slidesPerView: 1.5,
-          spaceBetween: 40,
-          autoplay: false,
-        },
       },
     });
     swipers.set(el, swiper); // Lưu instance Swiper

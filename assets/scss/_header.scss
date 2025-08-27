@@ -82,7 +82,7 @@
     background-color: var(--color-primary);
     padding: 0 40px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr;
     align-items: center;
     &-empty {
       @media (max-width: 991px) {
@@ -112,6 +112,7 @@
     &-inner {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 24px;
       @media (max-width: 991px) {
         gap: 12px;

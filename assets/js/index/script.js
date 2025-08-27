@@ -266,34 +266,6 @@ function sectionGallery() {
   });
 }
 
-function model3D() {
-  if (document.querySelector(".skoda-car").length < 1) return;
-  function generateCarImages(basePath, totalImages) {
-    const imageArray = [];
-    for (let i = 1; i <= totalImages; i++) {
-      imageArray.push(`${basePath}/car_${i}.png`);
-    }
-
-    return imageArray;
-  }
-
-  // Sử dụng
-  let mainUrl = "./assets/images/white";
-  const assetUrl = $("#header").data("assest");
-  if (assetUrl) {
-    mainUrl = assetUrl + "/assets/images/white";
-  }
-
-  console.log(mainUrl);
-
-  $("#skoda-modal-container").rollerblade({
-    sensitivity: 300,
-    auto: true,
-    drag: false,
-    imageArray: generateCarImages(mainUrl, 24)
-  });
-}
-
 function formBooking() {
   if ($("#modalBooking").length < 1) return;
 
@@ -462,9 +434,39 @@ function formBooking() {
     this.value = formatted;
   });
 }
+
+function model3D() {
+  if (document.querySelector(".skoda-car").length < 1) return;
+  function generateCarImages(basePath, totalImages) {
+    const imageArray = [];
+    for (let i = 1; i <= totalImages; i++) {
+      imageArray.push(`${basePath}/car_${i}.png`);
+    }
+
+    return imageArray;
+  }
+
+  // Sử dụng
+  let mainUrl = "./assets/images/white";
+  const assetUrl = $("#header").data("assest");
+  if (assetUrl) {
+    mainUrl = assetUrl + "/assets/images/white";
+  }
+
+  console.log(mainUrl);
+
+  $("#skoda-modal-container").rollerblade({
+    sensitivity: 300,
+    auto: true,
+    drag: false,
+    imageArray: generateCarImages(mainUrl, 24)
+  });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   model3D();
 });
+
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
   heroSwiper();

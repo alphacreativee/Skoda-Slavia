@@ -70,3 +70,15 @@
 .glightbox-clean .gprev {
   background-image: url("/assets/images/arrow-gallery-left.svg") !important;
 }
+
+.glightbox-clean .gclose {
+  background-color: transparent !important;
+}
+
+.gslide-image img.zoomable {
+  cursor: grab;
+}
+
+.gslide-image img {
+  max-width: 1024px;
+}

@@ -40,6 +40,27 @@
         gap: 32px;
         justify-content: unset;
       }
+      .cta-desktop {
+        &:hover {
+          a {
+            color: var(--color-secondary) !important;
+          }
+          .icon {
+            svg {
+              path {
+                fill: var(--color-secondary);
+              }
+            }
+          }
+        }
+        .icon {
+          svg {
+            path {
+              transition: all 0.3s ease;
+            }
+          }
+        }
+      }
       ul {
         display: flex;
         gap: 70px;
@@ -58,6 +79,7 @@
 
           a {
             color: var(--color-white) !important;
+            transition: all 0.3s ease;
           }
         }
       }

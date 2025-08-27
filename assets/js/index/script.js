@@ -125,8 +125,6 @@ function sectionDesign() {
     .width();
   var actPosition = $(".section-design .nav-tabs .active").position();
 
-  console.log($(".section-design .slider"));
-
   $(".section-design .slider").css({
     left: +actPosition.left,
     width: actWidth
@@ -390,8 +388,6 @@ function formBooking() {
         agency: agency
       };
 
-      console.log(formData);
-
       const WEB_APP_URL =
         "https://script.google.com/macros/s/AKfycbw1BLYJRYJRuaYR3tBSNuvPsIPUc6mM3m6Oolrjnk9iwRqgmXLmOllii_x94tOQn-vx/exec";
 
@@ -455,8 +451,6 @@ function model3D() {
     mainUrl = assetUrl + "/assets/images/white";
   }
 
-  console.log(mainUrl);
-
   $("#skoda-modal-container").rollerblade({
     sensitivity: 800,
     auto: true,
@@ -489,7 +483,7 @@ function headerDesktop() {
     });
 
     document.querySelectorAll("section[id]").forEach((section) => {
-      const link = document.querySelector(`a[href="#${section.id}"]`);
+      const link = document.querySelector(`#header a[href="#${section.id}"]`);
 
       if (link) {
         ScrollTrigger.create({
@@ -499,7 +493,7 @@ function headerDesktop() {
           // markers: true,
           onEnter: () => {
             // Remove active từ tất cả links
-            document.querySelectorAll('a[href^="#"]').forEach((a) => {
+            document.querySelectorAll('#header a[href^="#"]').forEach((a) => {
               a.classList.remove("active");
             });
             // Add active cho link tương ứng
@@ -507,7 +501,7 @@ function headerDesktop() {
           },
           onEnterBack: () => {
             // Khi scroll ngược lại
-            document.querySelectorAll('a[href^="#"]').forEach((a) => {
+            document.querySelectorAll('#header a[href^="#"]').forEach((a) => {
               a.classList.remove("active");
             });
             link.classList.add("active");
@@ -584,7 +578,6 @@ $("a").on("click", function (e) {
   // Nếu liên kết dẫn đến trang khác (không phải hash link hoặc javascript void)
   if (this.href && !this.href.match(/^#/) && !this.href.match(/^javascript:/)) {
     isLinkClicked = true;
-    console.log("1");
   }
 });
 

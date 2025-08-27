@@ -64,3 +64,9 @@ body {
   font-family: var(--font-primary);
   background-color: #f2f2f2;
 }
+html {
+  scroll-padding-top: 150px;
+  @media (max-width: 991px) {
+    scroll-padding-top: 100px;
+  }
+}

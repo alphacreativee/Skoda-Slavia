@@ -53,7 +53,7 @@ function heroSwiper() {
       speed: 1500,
       loop: true,
       autoplay: {
-        delay: 3000
+        delay: 3000,
       },
       pagination: {
         el: el.querySelector(".swiper-pagination"),
@@ -63,7 +63,7 @@ function heroSwiper() {
             <button class="${className}">
               <span class="progress-bar-swiper"></span>
             </button>`;
-        }
+        },
       },
 
       on: {
@@ -104,8 +104,8 @@ function heroSwiper() {
               slideInner.style.transition = `${speed}ms ${easing}`;
             }
           });
-        }
-      }
+        },
+      },
     });
   });
 }
@@ -127,7 +127,7 @@ function sectionDesign() {
 
   $(".section-design .slider").css({
     left: +actPosition.left,
-    width: actWidth
+    width: actWidth,
   });
 
   if (!document.querySelector(".swiper-design-parallax")) return;
@@ -145,23 +145,23 @@ function sectionDesign() {
       loop: true,
       loopedSlides: 2,
       autoplay: {
-        delay: 2000
+        delay: 2000,
       },
       pagination: {
         el: el.querySelector(".swiper-pagination"),
-        type: "progressbar"
+        type: "progressbar",
       },
       navigation: {
         nextEl: el.querySelector(".swiper-button-next"),
-        prevEl: el.querySelector(".swiper-button-prev")
+        prevEl: el.querySelector(".swiper-button-prev"),
       },
       breakpoints: {
         991: {
           slidesPerView: 1.5,
           spaceBetween: 40,
-          autoplay: false
-        }
-      }
+          autoplay: false,
+        },
+      },
     });
     swipers.set(el, swiper); // Lưu instance Swiper
     return swiper;
@@ -203,7 +203,7 @@ function animateTextKaraoke() {
     const splitKaraoke = new SplitText(karaoke, {
       type: "words, chars",
       wordsClass: "word",
-      charsClass: "char"
+      charsClass: "char",
     });
 
     gsap.to(splitKaraoke.chars, {
@@ -216,8 +216,8 @@ function animateTextKaraoke() {
         start: "top 85%",
         end: "top 30%",
         // markers: true,
-        scrub: true
-      }
+        scrub: true,
+      },
     });
   });
 }
@@ -233,7 +233,7 @@ function svgSokoda() {
         el.classList.add("active-svg");
       },
 
-      once: true
+      once: true,
     });
   });
 }
@@ -262,7 +262,7 @@ function sectionGallery() {
   var lightboxDescription = GLightbox({
     selector: ".glightbox",
     loop: true,
-    touchNavigation: true
+    touchNavigation: true,
   });
 }
 
@@ -303,7 +303,7 @@ function formBooking() {
         } catch (error) {
           console.error("Lỗi trong Lightpick onSelect:", error);
         }
-      }
+      },
     });
   }
 
@@ -385,7 +385,7 @@ function formBooking() {
         phone: phone,
         email: email,
         location: location,
-        agency: agency
+        agency: agency,
       };
 
       console.log(formData);
@@ -409,7 +409,7 @@ function formBooking() {
         error: function (xhr, status, error) {
           console.error(xhr.responseText);
           alert("Có lỗi xảy ra, vui lòng thử lại.");
-        }
+        },
       });
     }
   });
@@ -459,14 +459,85 @@ function model3D() {
     sensitivity: 300,
     auto: true,
     drag: false,
-    imageArray: generateCarImages(mainUrl, 24)
+    imageArray: generateCarImages(mainUrl, 24),
   });
 }
+function headerDesktop() {
+  document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
+
+    // Click scroll + active
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        const targetElement = document.querySelector(this.getAttribute("href"));
+        if (targetElement) {
+          gsap.to(window, {
+            duration: 1,
+            scrollTo: { y: targetElement, offsetY: 200 },
+            ease: "power2.out",
+          });
+        }
+
+        document
+          .querySelectorAll('a[href^="#"]')
+          .forEach((a) => a.classList.remove("active"));
+        this.classList.add("active");
+      });
+    });
+
+    document.querySelectorAll("section[id]").forEach((section) => {
+      const link = document.querySelector(`a[href="#${section.id}"]`);
+
+      if (link) {
+        ScrollTrigger.create({
+          trigger: section,
+          start: "top 200px",
+          end: "bottom 200px",
+          // markers: true,
+          onEnter: () => {
+            // Remove active từ tất cả links
+            document.querySelectorAll('a[href^="#"]').forEach((a) => {
+              a.classList.remove("active");
+            });
+            // Add active cho link tương ứng
+            link.classList.add("active");
+          },
+          onEnterBack: () => {
+            // Khi scroll ngược lại
+            document.querySelectorAll('a[href^="#"]').forEach((a) => {
+              a.classList.remove("active");
+            });
+            link.classList.add("active");
+          },
+        });
+      }
+    });
+
+    ScrollTrigger.refresh();
+  });
+}
+headerDesktop();
 
 document.addEventListener("DOMContentLoaded", function () {
   model3D();
 });
-
+function menuMobile() {
+  if (window.innerWidth > 992) return;
+  const menuBtn = document.querySelector(".header-ham");
+  const menuInner = document.querySelector(".header-sub-menu");
+  const items = document.querySelectorAll(".header-sub-menu li a");
+  menuBtn.addEventListener("click", () => {
+    menuBtn.classList.toggle("active");
+    menuInner.classList.toggle("active");
+  });
+  items.forEach((item) => {
+    item.addEventListener("click", () => {
+      menuBtn.classList.remove("active");
+      menuInner.classList.remove("active");
+    });
+  });
+}
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
   heroSwiper();
@@ -476,6 +547,7 @@ const init = () => {
   sectionGallery();
   formBooking();
   footer();
+  menuMobile();
 };
 preloadImages("img").then(() => {
   // Once images are preloaded, remove the 'loading' indicator/class from the body

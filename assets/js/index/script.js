@@ -462,7 +462,9 @@ function formBooking() {
     this.value = formatted;
   });
 }
-
+document.addEventListener("DOMContentLoaded", function () {
+  model3D();
+});
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
   heroSwiper();
@@ -470,7 +472,6 @@ const init = () => {
   svgSokoda();
   sectionDesign();
   sectionGallery();
-  model3D();
   formBooking();
   footer();
 };

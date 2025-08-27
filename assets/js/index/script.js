@@ -522,7 +522,22 @@ headerDesktop();
 document.addEventListener("DOMContentLoaded", function () {
   model3D();
 });
-
+function menuMobile() {
+  if (window.innerWidth > 992) return;
+  const menuBtn = document.querySelector(".header-ham");
+  const menuInner = document.querySelector(".header-sub-menu");
+  const items = document.querySelectorAll(".header-sub-menu li a");
+  menuBtn.addEventListener("click", () => {
+    menuBtn.classList.toggle("active");
+    menuInner.classList.toggle("active");
+  });
+  items.forEach((item) => {
+    item.addEventListener("click", () => {
+      menuBtn.classList.remove("active");
+      menuInner.classList.remove("active");
+    });
+  });
+}
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
   heroSwiper();
@@ -532,6 +547,7 @@ const init = () => {
   sectionGallery();
   formBooking();
   footer();
+  menuMobile();
 };
 preloadImages("img").then(() => {
   // Once images are preloaded, remove the 'loading' indicator/class from the body

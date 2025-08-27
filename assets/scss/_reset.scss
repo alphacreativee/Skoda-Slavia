@@ -66,4 +66,7 @@ body {
 }
 html {
   scroll-padding-top: 150px;
+  @media (max-width: 991px) {
+    scroll-padding-top: 100px;
+  }
 }

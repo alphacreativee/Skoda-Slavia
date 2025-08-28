@@ -531,6 +531,31 @@ function headerDesktop() {
   });
 }
 headerDesktop();
+
+function header() {
+  if ($("#header").length < 1) return;
+
+  const header = $("#header");
+  const headerTop = header.find(".header-top").outerHeight();
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  ScrollTrigger.create({
+    trigger: "body",
+    start: () => `${headerTop}px top`,
+    end: () => document.body.scrollHeight,
+    onUpdate: (self) => {
+      if (self.direction === 1) {
+        // scroll xuống
+        header.addClass("scroll");
+      } else {
+        // scroll lên
+        header.removeClass("scroll");
+      }
+    }
+  });
+}
+
 function backToTop() {
   if (!document.getElementById("back-to-top")) return;
   let myButton = document.getElementById("back-to-top");
@@ -579,6 +604,7 @@ const init = () => {
   sectionDesign();
   sectionGallery();
   formBooking();
+  header();
   footer();
   menuMobile();
   backToTop();
